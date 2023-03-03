@@ -1,0 +1,45 @@
+Discussion Question 1:
+Intuitively, you'd think delay would increase since more bits are present. One could also imaging it wouldn't be that much more delay because it seems a not very complex calculation occurs, it's a multiplexer. But as shown in the fanout section on the PSET, 'the single select signal drives a growing number of gates, i.e., its fanout grows".
+
+4   -> Gates =  13, Area =  10.11 um^2, CPD =   40.48 ps
+16  -> Gates =  49, Area =  38.84 um^2, CPD =   96.96 ps
+64  -> Gates = 193, Area = 153.75 um^2, CPD =  331.07 ps
+256 -> Gates = 769, Area = 613.40 um^2, CPD = 1825.21 ps
+
+
+
+Discussion Question 2:
+Based on the paragraph in the PSET, I would expect the delay to rise but at a much lower rate than it did for Question 1. It will be optimizing CPD, so the slope of our CPD compared to input number of bits will be much less, but I think that could make area increase at a faster rate too. Based on the results below, the hypothesis was mostly correct.
+
+4   -> Gates =  13, Area =  10.11 um^2, CPD =  40.48 ps
+16  -> Gates =  54, Area =  42.83 um^2, CPD =  86.49 ps
+64  -> Gates = 216, Area = 172.10 um^2, CPD = 110.90 ps
+256 -> Gates = 862, Area = 687.61 um^2, CPD = 106.29 ps
+
+
+
+Discussion Question 3:
+As basically stated in the proceeding paragraph, when using multisize I'd expect the area to increase and the delay to go down. Multisize will used larger gates on the critical path and smaller gates elsewhere where it can optimize. In this case, there are 13 X4 buffers used.
+
+4   -> Gates =  13, Area =  10.37 um^2, CPD = 37.11 ps
+16  -> Gates =  50, Area =  51.07 um^2, CPD = 52.40 ps
+64  -> Gates = 206, Area = 178.22 um^2, CPD = 65.82 ps
+256 -> Gates = 826, Area = 727.78 um^2, CPD = 84.19 ps
+
+
+
+Discussion Question 4:
+lt32        -> Gates =  221, Area =  233.28 um^2, CPD = 210.40 ps
+sft32       -> Gates =  703, Area =  585.47 um^2, CPD = 192.23 ps
+addSub#(32) -> Gates =  226, Area =  275.04 um^2, CPD = 605.70 ps
+ALU         -> Gates = 1391, Area = 1339.58 um^2, CPD = 614.08 ps
+
+After viewing the stats for each component, it appears that the addSub determines the critical-path delay of the ALU, since they are very close to the same value. In terms of area, the sft32 takes up a larger chunk, more than the lt32 and addSub combined. 
+
+
+
+Discussion Question 5:
+sft32_alt -> Gates = 991, Area = 885.25 um^2, CPD = 166.20 ps
+
+The alternate version utilizes more gates and area, which we expect given that it calls the barrel shifter three times. However, it does run faster, so it does have some benefit. For my ALU, the increase in area would make an already large part even larger, and the CPD decrease doesn't help us much since the CPD of the entire ALU is more depending on the addSub time than the sft32 time.
+

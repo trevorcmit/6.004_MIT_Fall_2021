@@ -1,0 +1,37 @@
+******* Lab 7 Discussion Questions *******
+
+
+Question 1: What are the index, line offset, and tags bits for each of the requests above?
+
+cache has 64 sets and 16 words per line
+logCacheSets = 6, logWordsPerline = 4
+
+0x00BC -> 0000 0000 1011 1100
+0x1094 -> 0001 0000 1001 0100
+0x0084 -> 0000 0000 1000 0100
+
+0x00BC -> Tag Bits = 0000, Index = 000010, Line Offset = 1111
+0x1094 -> Tag Bits = 0001, Index = 000010, Line Offset = 0101
+0x0084 -> Tag Bits = 0000, Index = 000010, Line Offset = 0001
+
+
+
+
+Question 2: What is the sequence of states that the cache FSM goes through when processing this sequence of requests? You may assume that the lines in the cache are initially not valid.
+
+1. Store 0x00BC  :  Ready -> Lookup ---(Clean Miss)---> Fill -> Ready
+2. Load  0x00BC  :  Ready -> Lookup -> Hit -> Ready
+3. Load  0x1094  :  Ready -> Lookup ---(Dirty Miss)---> Writeback -> Fill -> Ready
+4. Store 0x0084  :  Ready -> Lookup ---(Clean Miss)---> Fill -> Ready 
+5. Load  0x00BC  :  Ready -> Lookup -> Hit -> Ready
+
+
+
+
+Question 3: Consider the two-way set-associative cache. What is the sequence of states that the cache FSM goes through when processing this sequence of requests? You may assume that the lines in the cache are initially invalid.
+
+1. Store 0x00BC  :  Ready -> Lookup ---(Clean Miss)---> Fill -> Ready
+2. Load  0x00BC  :  Ready -> Lookup -> Hit -> Ready
+3. Load  0x1094  :  Ready -> Lookup ---(Clean Miss)---> Fill -> Ready
+4. Store 0x0084  :  Ready -> Lookup ---(Clean Miss)---> Fill -> Ready 
+5. Load  0x00BC  :  Ready -> Lookup -> Hit -> Ready

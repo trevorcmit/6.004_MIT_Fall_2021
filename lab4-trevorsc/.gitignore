@@ -1,0 +1,10 @@
+buildDir
+synthDir
+checkDir
+*.bo
+Tb_*
+ALU.bsv
+testout*
+
+# Minispec temp directories
+tmp_msc_*

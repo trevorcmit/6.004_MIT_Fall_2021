@@ -1,0 +1,54 @@
+Question 1:
+rs1 = 00001
+immU = 1 (1 in 12 index and the rest zeros)
+This  loading 1 shifted left by 12 bits into the register 1. We could write this in RISC-V in an instruction like:
+lui x1, 1
+
+
+
+Question 2:
+rs1 = 00010
+rs2 = 00001
+rd  = 00011
+This is performing an AND on the values stored in reg 1 and 2 and storing in reg 3, so we could write this in RISC-V like:
+and x3, x1, x2
+
+
+
+Question 3:
+a) Yes, a 32-bit word with instr[6:0] == 0b0110111 is always an LUI instruction. From the ISA reference, it is the only base instruction beginning with that binary sequence. In opLui, there is only one option for dInst output, meaning that there is only one LUI case.
+
+b) No, a 32-bit word with instr[6:0] == 0b0110011 and instr[14:12] == 0b111 is not always an AND instruction. From the ISA reference, the [6:0] bits indicate an opOp case, which all share the same leading seven bits. The [14:12] indices are what distinguish the opOp cases from each other, and in this case 111 in [14:12] means that it is an AND.
+
+
+
+Question 4: 
+Yes, my quicksort.S has three ret instructions. 
+jalr x0, 0(x1)
+x1 hold return address, set program counter to x1 + 0 offset, so it acts as return statement
+
+
+
+Question 5:
+It appears the RegisterFile.ms skips the zero index when initializing registers. This makes x0's hardwiring to zero make sense, since it is never referenced during the register file initialization.
+
+
+
+Question 6:
+Gates: 10639
+Area: 14110.24 um^2
+Critial Path Delay: 888.96 ps
+Minimum clock period will be the critical path delay, since that is the shortest we could make the clock period and still allow all instructions to run to completion. I would imagine one of the OP paths requiring the usage of the ALU would be the critical path.
+
+
+
+Question 7:
+Decode  -> Gates:  216, Area:  207.21 um^2, CPD: 126.30 ps
+Execute -> Gates: 2615, Area: 2498.27 um^2, CPD: 670.27 ps
+MagicM  -> Gates:   39, Area:   34.58 um^2, CPD:  84.53 ps
+The Execute module by far contributes most to the critical path delay. Adjusting my ALU code to utilize the fast adder would likely help lower the CPD by a fair amount. 
+
+
+
+Question 8:
+The sum of the individual CPDs is 881.1 ps, whereas the overall Processor CPD is 888.96 ps. I would say they're different since the critical paths of each individual file may not line up together on the same input instruction. 

@@ -1,0 +1,46 @@
+Discussion Question 1:
+
+synth CombDigitalSystems.ms bit_scan_reverse
+- Gates: 5
+- Area: 3.46 um^2
+- CPD: 25.26 ps
+
+Yes, the circuit diagram made by synth performs the same function as my implementation in minispec. It is not constructed of the same gates, but it returns the same output when given a specific input.
+
+
+
+
+
+Discussion Question 2:
+
+synth CombDigitalSystems.ms seven_segment_decoder
+- Gates: 40
+- Area: 30.06 um^2
+- CPD: 73.51 ps
+
+synth CombDigitalSystems.ms seven_segment_decoder -l extended
+- Gates: 31
+- Area: 27.13 um^2
+- CPD: 76.04 ps
+
+The extended library version utilizes many new gates. Notably, it includes 6 3-input gates, in addition to a few 2-input AND, OR, and XNOR gates. Interestingly it uses a buffer, which is included in the normal library but is not used in that case. By using less gates, it is able to decrease the area, but it seems due to more complex gates it increases the critical-path delay.
+
+
+
+
+
+
+Discussion Question 3:
+
+synth CombDigitalSystems.ms parity4 -l extended
+- Gates: 11
+- Area: 9.84 um^2
+- CPD: 50.10 ps
+
+synth CombDigitalSystems.ms parity4 -l extended -d 1000
+- Gates: 3
+- Area: 4.79 um^2
+- CPD: 56.60 ps
+
+When we relax the delay, we cut the number of gates almost by a quarter, and reduce area by about half. This condensing in size only results in about ~5.5 ps increase in critical-path delay.
+

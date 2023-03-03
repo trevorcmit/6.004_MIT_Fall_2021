@@ -1,0 +1,15 @@
+# build files
+*.so
+*.bo
+buildDir/*
+synthDir/*
+
+# Minispec temp directories
+tmp_msc_*
+
+# editor swap files
+*.sw*
+*~
+
+#test results
+testout

@@ -1,0 +1,70 @@
+Discussion Question 1:
+The test function given in the PSET says it returns an incorrect answer when done in SecureCRT/Athena. This backs up my assumption that the multiplication by adding does not work on two's-complement encoding, since the signed bit messes up the addition when it reaches the higher index bits. For example, the tester returns that it is doing 81 * -1, but my solution returns 20655, a very large positive value rather than -81. 
+
+
+
+Discussion Question 2:
+multiply_by_adding#(8) -> Gates = 557, Area = 564.98 um^2, CPD: 606.46 ps
+FoldedMultiplier#(8)   -> Gates = 418, Area = 570.84 um^2, CPD: 288.71 ps
+
+The areas of the two functions are about the same, but the Folded Multiplier has about half the critical-path delay. As described in the PSET handout, an 8-bit folded multiplier will utilize n cycles.
+
+
+
+Discussion Question 3:
+multiply_by_adding#(4)  -> Gates =    99, Area =   109.06 um^2, CPD:  219.28 ps
+multiply_by_adding#(8)  -> Gates =   557, Area =   564.98 um^2, CPD:  606.46 ps
+multiply_by_adding#(16) -> Gates =  2360, Area =  2193.44 um^2, CPD: 1431.27 ps
+multiply_by_adding#(32) -> Gates = 10132, Area =  9664.05 um^2, CPD: 3010.73 ps
+multiply_by_adding#(64) -> Gates = 41251, Area = 37340.55 um^2, CPD: 6370.37 ps
+
+The critical path delay appears to grow double as input bits is doubled. This means it is around O(n) in relation to bits. It grows fast as you begin adding more bits. Similarly, area and number of gates grow rapidly, multiplying about 4-5 times its previous value, similar to logarithmic growth but with a steeper slope.
+
+
+
+Discussion Question 4:
+FoldedMultiplier#(4)  -> Gates =  205, Area =  286.48 um^2, CPD: 204.77 ps
+FoldedMultiplier#(8)  -> Gates =  418, Area =  570.84 um^2, CPD: 288.71 ps
+FoldedMultiplier#(16) -> Gates =  898, Area = 1180.77 um^2, CPD: 382.12 ps
+FoldedMultiplier#(32) -> Gates = 1920, Area = 2245.04 um^2, CPD: 474.82 ps
+FoldedMultiplier#(64) -> Gates = 3903, Area = 4738.79 um^2, CPD: 545.71 ps
+
+Gates appears to double as the exponent is increased by 1, so it appears to be about linear with number of bits. CPD seems to be even less asymptotically than O(n), since as input bits is doubled it remains effectively linear, thus it is likely closer to an O(log n) growth.
+
+
+
+Discussion Question 5:
+abs       -> Gates =  72, Area =  88.58 um^2, CPD =  94.66 ps
+add10     -> Gates =  54, Area =  64.37 um^2, CPD =  95.54 ps
+divide3   -> Gates = 129, Area = 141.25 um^2, CPD = 440.50 ps
+multiply7 -> Gates = 355, Area = 364.42 um^2, CPD = 286.39 ps
+
+The multiply and divide have vastly more critical delay than absolute value and addition. If all were combined in a single combinatorial function, the overall propagation delay would depend most on divide3, since it has by far the highest CPD of the four operations.
+
+
+
+Discussion Question 6:
+bitonicSort#(2)  -> Gates =   405, Area =   384.90 um^2, CPD =  203.45 ps
+bitonicSort#(4)  -> Gates =  2266, Area =  2125.34 um^2, CPD =  619.69 ps
+bitonicSort#(8)  -> Gates =  9508, Area =  9189.77 um^2, CPD = 1245.47 ps
+bitonicSort#(16) -> Gates = 29481, Area = 32480.73 um^2, CPD = 2127.46 ps
+
+Intuitively I'd imagine latency would at least double since the bitonic sorter would use two of the previous level of sorter for each half of its inputs (as shown in the diagram on the PSET). This seems to be upheld by the resulting critical path delays.
+
+
+
+Discussion Question 7:
+I would expect the area to about quadruple on each double of input size, since we would use two of the previous size sorters and the merger would double in size, leading to an overall quadrupling in area. This appears to be about correct, in line with expectation.
+
+
+
+Discussion Question 8:
+bitonicSort#(8)  -> Gates =  9508, Area =  9189.77 um^2, CPD = 1245.47 ps
+BitonicSorter8   -> Gates = 11184, Area = 16057.62 um^2, CPD =  191.28 ps
+
+The latency of BitonicSorter8 is about 1148ps, as compared to 1245ps for the 8 bit version of bitonicSort. This is because it has 6 stages, as shown in the PSET handout. For both minimizing latency and maximizing throughput I would use BitonicSorter8, assuming I could set the clock speed accordingly to make use of the advantages of it.
+
+
+
+Discussion Question 9:
+Since clock speed is set to 2000 picoseconds, then if I am understanding correctly we would want to use bitonicSort since that its CPD of 1245 ps is enough to complete the entire operation, whereas the pipelined bitonicsorter would require 6 clock cycles to go through each stage, effectively making it much slower than bitonicSort. 

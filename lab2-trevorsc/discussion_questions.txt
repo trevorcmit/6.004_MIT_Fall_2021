@@ -1,0 +1,1 @@
+Question 1: About 85% of the time is spent on partition. If I wanted to improve, I would definitely refactor partition since each performance increase will be about ~0.85 times reflected in overall runtime. 

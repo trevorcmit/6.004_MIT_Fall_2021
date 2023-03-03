@@ -1,0 +1,10 @@
+buildDir/*
+synthDir*
+*.so
+*.bo
+*synth_out
+
+# Minispec temp directories
+tmp_msc_*
+FoldedMultiplierCustomTest*
+BitonicSorter8DebugTest

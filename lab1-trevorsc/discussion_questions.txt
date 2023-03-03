@@ -1,0 +1,10 @@
+- Discussion Question 1: When broken down to binary, even numbers have a 0 in the 2^0 place, and odd numbers have a 1 in the 2^0 place. Thus, when we perform AND with 1, we will receive a 1 if the number n is odd (since both share a 1 in 2^0 place), and a 0 if the number is even (since both share a 0 in the 2^0 place). 
+
+
+- Discussion Question 2: The code could be adjusted so after performing the operation for a specific value of n, reevaluates its parity, then recursively goes onto the next iteration. In addition, have a check for equivalency to 1, so that it knows to stop and proceed to End.
+
+
+- Discussion Question 3: In test 1, the simulation branches to Else but not Then. In test 2, both Then and Else are used. 
+
+
+- Discussion Question 4: My swapping of p[i] and p[i+1] involved loading p[i] into a3 and p[i+1] into a4, then saving a4 in p[i] and a3 in p[i+1]. The actual saving part is only two lines, just two sw commands. Two instances of lw and two of sw.

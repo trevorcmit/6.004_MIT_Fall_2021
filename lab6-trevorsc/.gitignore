@@ -1,0 +1,26 @@
+# build files
+*.bo
+*.ba
+mem.vmh
+*.so
+Processor
+DecodeTB
+ExecuteTB
+
+# build directories
+build_dir/
+test_out/
+sw/build/
+sw/quicksort/build/
+sw/quicksort/*.dump
+sw/quicksort/*.vmh
+
+# Minispec temp directories
+tmp_msc_*
+
+# editor swap files
+*.sw*
+*~
+
+# auto-test result file
+testout
